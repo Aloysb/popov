@@ -1,5 +1,30 @@
-import { Flex, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react';
+import { AddIcon, CheckIcon, Search2Icon } from '@chakra-ui/icons';
+import {
+  Flex,
+  Input,
+  TabList,
+  Stack,
+  Tabs,
+  Box,
+  Tab,
+  TabPanel,
+  TabPanels,
+  Heading,
+  Button,
+  Center,
+  FormControl,
+  FormLabel,
+  InputGroup,
+  InputLeftElement,
+  ButtonGroup,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+} from '@chakra-ui/react';
 import { useReducer } from 'react';
+import AddCompanyTab from './AddCompanyTab';
+import AddLeadCompanyTab from './AddLeadCompanyTab';
 import AddLeadInput from './AddLeadInput';
 
 const AddLeadPage = (): JSX.Element => {
@@ -79,15 +104,65 @@ const AddLeadPage = (): JSX.Element => {
     };
 
   return (
-    <Flex flexDirection="column">
-      {inputsInfo.map(({ label, value, placeholder, actionType }) => (
-        <AddLeadInput
-          label={label}
-          placeholder={placeholder}
-          value={value}
-          onChange={dispatchNewValue(actionType)}
-        />
-      ))}
+    <Flex flexDirection="column" alignItems="stretch" flex="1" py={4}>
+      <Tabs isFitted flex="1">
+        <Flex flexDir="column" h="full">
+          <TabList>
+            <Tab>Contact</Tab>
+            <Tab>Company</Tab>
+          </TabList>
+          <TabPanels flexGrow="1">
+            <TabPanel h="full">
+              <Flex flexDir="column" h="full">
+                <Accordion allowMultiple flex="1">
+                  <AccordionItem borderTop="0">
+                    <AccordionButton
+                      border="1px"
+                      borderColor="gray.700"
+                      borderRadius={4}
+                    >
+                      Details
+                    </AccordionButton>
+                    <AccordionPanel>
+                      <Stack flex="1" spacing="4">
+                        {inputsInfo.map(
+                          ({ label, value, placeholder, actionType }) => (
+                            <AddLeadInput
+                              label={label}
+                              placeholder={placeholder}
+                              value={value}
+                              onChange={dispatchNewValue(actionType)}
+                            />
+                          )
+                        )}
+                      </Stack>
+                    </AccordionPanel>
+                  </AccordionItem>
+                  <AccordionItem borderTop="0" borderBottom="0">
+                    <AccordionButton
+                      border="1px"
+                      borderColor="gray.700"
+                      borderRadius={4}
+                    >
+                      Company
+                    </AccordionButton>
+
+                    <AccordionPanel>
+                      <AddLeadCompanyTab />
+                    </AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+                <Center>
+                  <Button>Save</Button>
+                </Center>
+              </Flex>
+            </TabPanel>
+            <TabPanel h="full">
+              <AddCompanyTab />
+            </TabPanel>
+          </TabPanels>
+        </Flex>
+      </Tabs>
     </Flex>
   );
 };

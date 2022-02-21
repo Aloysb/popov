@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Container, Flex } from '@chakra-ui/react';
 
 import Navbar, { NavigationItems } from './Navbar';
 import SearchPage from './SearchPage';
@@ -26,9 +26,11 @@ const Router = (): JSX.Element => {
 
   return (
     <Flex direction="column" flex="1" maxHeight="100vh" overflowY="scroll">
-      <Flex as="main" flex="1" justifyContent="center">
-        {currentPage()}
-      </Flex>
+      <Container flex="1">
+        <Flex as="main" justifyContent="center" h="full">
+          {currentPage()}
+        </Flex>
+      </Container>
       <Navbar activeLink={currentRoute} navigateTo={setCurrentRoute} />
     </Flex>
   );
