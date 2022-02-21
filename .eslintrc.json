@@ -38,6 +38,7 @@
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
     "react/jsx-props-no-spreading": "off",
     "linebreak-style": "off",
+    "no-shadow": "off",
     "eol-last": "off",
     "max-len": ["warn", { "code": 80 }],
     "import/extensions": ["error", "never", { "svg": "always" }],

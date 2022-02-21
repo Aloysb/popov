@@ -1,11 +1,11 @@
 {
-  "name": "stellaris-modding-toolbox",
-  "version": "0.0.0",
+  "name": "Popov",
+  "version": "0.1.0",
   "author": {
-    "name": "David Sima",
-    "email": "hello@david-sima.dev",
-    "url": "https://github.com/The24thDS"
+    "name": "Alo",
+    "email": "aloysberger@gmail.com"
   },
+  "description": "Frontend for Popov, a lean, simple and map driven CRM.",
   "private": true,
   "license": "MIT",
   "scripts": {
