@@ -18,7 +18,7 @@ interface Address {
 const LeadCard = ({ lead }: { lead: Lead }) => {
   const { name, position, company } = lead;
   return (
-    <Box bg="white" borderRadius={8} color="blue.800" p={4}>
+    <Box bg="gray.200" borderRadius={8} color="blue.800" p={4}>
       <Flex>
         <Flex flexDir="column" flex="1">
           <Text>{name}</Text>

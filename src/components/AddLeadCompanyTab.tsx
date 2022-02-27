@@ -4,7 +4,7 @@ import {
   Box,
   Button,
   FormControl,
-  FormLabel,
+  Heading,
   InputGroup,
   Input,
   InputLeftElement,
@@ -26,59 +26,81 @@ const AddLeadCompanyTab = (): JSX.Element => {
       name: 'Hello',
     },
     {
-      key: 5,
+      key: 2,
       name: 'World',
     },
     {
-      key: 4,
+      key: 3,
       name: 'Surf',
     },
     {
-      key: 3,
+      key: 4,
       name: 'Pacman',
     },
     {
-      key: 2,
+      key: 5,
       name: 'Popov',
     },
   ];
 
   return (
-    <Stack>
-      <FormControl>
-        <InputGroup>
-          <InputLeftElement>
-            <Search2Icon />
-          </InputLeftElement>
-          <Input
-            type="text"
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="search"
-          />
-        </InputGroup>
-      </FormControl>
-      <Box h={4} />
-      {companies
-        .filter((company) =>
-          company.name.toLowerCase().includes(search.toLowerCase())
-        )
-        .map((company, idx) => (
-          <Button
-            key={company.key}
-            onClick={() => {
-              setSelectedCompany(idx);
-            }}
-            variant="outline"
-            isActive={selectedCompany === idx}
-            leftIcon={selectedCompany === idx ? <CheckIcon /> : undefined}
-          >
-            {company.name}
-          </Button>
-        ))}
-      <Button variant="outline" leftIcon={<AddIcon />}>
-        Add a new company
-      </Button>
-    </Stack>
+    <>
+      <Heading pb={4} pt={8}>
+        Entreprise
+      </Heading>
+      <Stack>
+        <FormControl>
+          <InputGroup>
+            <InputLeftElement>
+              <Search2Icon color="whiteAlpha.400" />
+            </InputLeftElement>
+            <Input
+              type="text"
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Rechercher"
+              background="gray.900"
+              boxShadow="inner"
+              border="none"
+            />
+          </InputGroup>
+        </FormControl>
+        <Box h={4} />
+        {companies
+          .filter((company) =>
+            company.name.toLowerCase().includes(search.toLowerCase())
+          )
+          .map((company) => (
+            <Button
+              boxShadow="sm"
+              key={company.key}
+              onClick={() => {
+                setSelectedCompany(company.key);
+              }}
+              variant="outline"
+              _active={{
+                bg: 'orange.600',
+                order: 0,
+              }}
+              order={1}
+              isActive={selectedCompany === company.key}
+              leftIcon={
+                selectedCompany === company.key ? <CheckIcon /> : undefined
+              }
+            >
+              {company.name}
+            </Button>
+          ))}
+        <Button
+          variant="outline"
+          color="whiteAlpha.400"
+          _hover={{ color: 'whiteAlpha.900', borderColor: 'orange.600' }}
+          leftIcon={<AddIcon />}
+          order={2}
+        >
+          Ajouter une nouvelle entreprise
+        </Button>
+      </Stack>
+    </>
   );
 };
 

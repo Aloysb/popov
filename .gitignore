@@ -4,5 +4,5 @@ dist
 dist-ssr
 *.local
 coverage
-.env
+.env.*
 build

@@ -16,8 +16,8 @@ export enum NavigationItems {
 const ICON_SIZE = 6;
 const MENU_ITEMS: [NavigationItems, JSX.Element][] = [
   [NavigationItems.MAP, <InfoIcon w={ICON_SIZE} h={ICON_SIZE} />],
-  [NavigationItems.SEARCH, <CalendarIcon w={ICON_SIZE} h={ICON_SIZE} />],
-  [NavigationItems.LIST, <SearchIcon w={ICON_SIZE} h={ICON_SIZE} />],
+  [NavigationItems.LIST, <CalendarIcon w={ICON_SIZE} h={ICON_SIZE} />],
+  [NavigationItems.SEARCH, <SearchIcon w={ICON_SIZE} h={ICON_SIZE} />],
   [NavigationItems.ADD, <AddIcon w={ICON_SIZE} h={ICON_SIZE} />],
 ];
 

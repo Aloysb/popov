@@ -1,5 +1,4 @@
 import { FormControl, FormLabel, Input } from '@chakra-ui/react';
-import { ActionType } from './AddLeadPage';
 
 const AddLeadInput = ({
   label,
@@ -13,8 +12,17 @@ const AddLeadInput = ({
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }): JSX.Element => (
   <FormControl>
-    <FormLabel>{label}</FormLabel>
+    <FormLabel
+      textTransform="uppercase"
+      color="whiteAlpha.700"
+      letterSpacing="widest"
+      fontSize="small"
+    >
+      {label}
+    </FormLabel>
     <Input
+      focusBorderColor="orange.700"
+      boxShadow="inner"
       value={value}
       onChange={(e) => onChange(e)}
       placeholder={placeholder}
