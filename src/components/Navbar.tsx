@@ -39,7 +39,7 @@ const Navbar = ({
   >
     <Flex justify="space-around" h="full">
       {MENU_ITEMS.map(([title, icon]) => (
-        <Box as="button" onClick={() => navigateTo(title)} flex="1">
+        <Box as="button" onClick={() => navigateTo(title)} flex="1" key={title}>
           <NavbarLinkMobile
             title={title}
             icon={icon}

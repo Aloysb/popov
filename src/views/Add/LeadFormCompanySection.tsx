@@ -1,17 +1,18 @@
+import { useState } from 'react';
+
 import { AddIcon, CheckIcon, Search2Icon } from '@chakra-ui/icons';
 import {
-  Stack,
   Box,
   Button,
   FormControl,
   Heading,
-  InputGroup,
   Input,
+  InputGroup,
   InputLeftElement,
+  Stack,
 } from '@chakra-ui/react';
-import { useState } from 'react';
 
-const AddLeadCompanyTab = (): JSX.Element => {
+const LeadFormCompanySection = (): JSX.Element => {
   interface Company {
     name: string;
     key: number;
@@ -104,4 +105,4 @@ const AddLeadCompanyTab = (): JSX.Element => {
   );
 };
 
-export default AddLeadCompanyTab;
+export default LeadFormCompanySection;

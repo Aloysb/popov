@@ -1,12 +1,8 @@
 import { useReducer } from 'react';
-import { Flex, useToast } from '@chakra-ui/react';
-import AddLeadCompanyTab from './AddLeadCompanyTab';
-import AddLeadSaveButton from './AddLeadSaveButton';
-import AddLeadContactInformationSection from './AddLeadContactInformationSection';
-import 'axios';
-import axios from 'axios';
 
-const AddLeadContactTabPanel = (): JSX.Element => {
+import { useToast } from '@chakra-ui/react';
+
+export const useAddLeadStore = () => {
   const initialState: State = {
     data: {
       firstName: '',
@@ -17,6 +13,7 @@ const AddLeadContactTabPanel = (): JSX.Element => {
       companyId: '',
       note: '',
     },
+    isLoading: false,
     error: null,
   };
 
@@ -26,32 +23,6 @@ const AddLeadContactTabPanel = (): JSX.Element => {
     return error ? error[1] : null;
   };
 
-  /// Save contact
-  const saveContact = async (state: State): Promise<boolean> => {
-    const maybeError = isValidState(state);
-
-    if (maybeError) {
-      reportError(maybeError);
-      return false;
-    }
-
-    console.log(state.data);
-    const body = Object.fromEntries(
-      Object.entries(state.data).filter(([_, value]) => value !== '')
-    );
-
-    //! Note should be optional...
-    const res = await axios.post('http://127.0.0.1:8080/lead', {
-      ...body,
-      note: 'Hello',
-    });
-    //  body);
-
-    console.log(res);
-
-    return true;
-  };
-
   const reportError = (errorMessage: string): void => {
     toast({
       title: "Impossible d'enregister le contact",
@@ -59,8 +30,32 @@ const AddLeadContactTabPanel = (): JSX.Element => {
       status: 'error',
     });
   };
-
   const toast = useToast({ position: 'top-right', variant: 'solid' });
+
+  /// Save contact
+  const saveNewLead = async (): Promise<boolean> => {
+    dispatch({ type: ActionType.SetIsLoading, payload: true });
+    const maybeError = isValidState(state);
+
+    if (maybeError) {
+      reportError(maybeError);
+      // dispatch({ type: ActionType.SetIsLoading, payload: false });
+      return false;
+    }
+
+    const body = Object.fromEntries(
+      Object.entries(state.data).filter(([_, value]) => value !== '')
+    );
+
+    //! Note should be optional...
+    // const res = await axios.post('http://127.0.0.1:8080/lead', {
+    //   ...body,
+    //   note: 'Hello',
+    // });
+    //  body);
+    // dispatch({ type: ActionType.SetIsLoading, payload: false });
+    return true;
+  };
 
   const formReducer = (state: State, action: Action): State => {
     const { type, payload } = action;
@@ -77,26 +72,21 @@ const AddLeadContactTabPanel = (): JSX.Element => {
         return { ...state, data: { ...state.data, lastName: payload } };
       case ActionType.ChangeCompany:
         return { ...state, data: { ...state.data, companyId: payload } };
+      case ActionType.SetIsLoading:
+        return { ...state, isLoading: payload };
       default:
         return state;
     }
   };
+
   const [state, dispatch] = useReducer(formReducer, initialState);
 
-  return (
-    <Flex flexDir="column" h="full">
-      <AddLeadContactInformationSection state={state} dispatch={dispatch} />
-      <AddLeadCompanyTab />
-      <AddLeadSaveButton
-        onClick={() => {
-          saveContact(state);
-        }}
-      />
-    </Flex>
-  );
+  return {
+    state,
+    dispatch,
+    saveNewLead,
+  };
 };
-
-export default AddLeadContactTabPanel;
 
 // TODO improve this, company should be company ID and number
 export type State = {
@@ -110,6 +100,7 @@ export type State = {
     note: string;
   };
   error: string | null;
+  isLoading: boolean;
 };
 
 export type Action = {
@@ -124,4 +115,5 @@ export enum ActionType {
   ChangeEmail = 'CHANGE_EMAIL',
   ChangePhone = 'CHANGE_PHONE',
   ChangeCompany = 'CHANGE_COMPANY',
+  SetIsLoading = 'SET_IS_LOADING',
 }

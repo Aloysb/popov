@@ -1,10 +1,11 @@
-import { Box, TabList, Tab } from '@chakra-ui/react';
+import { Box, Tab, TabList } from '@chakra-ui/react';
 
-const AddLeadTabList = (): JSX.Element => (
+const AddTabList = (): JSX.Element => (
   <Box>
     <TabList>
       {Object.values(TabNames).map((tab) => (
         <Tab
+          key={tab}
           _selected={{
             bg: 'orange.600',
             color: 'whiteAlpha.900',
@@ -20,7 +21,7 @@ const AddLeadTabList = (): JSX.Element => (
   </Box>
 );
 
-export default AddLeadTabList;
+export default AddTabList;
 
 enum TabNames {
   lead = 'contact',

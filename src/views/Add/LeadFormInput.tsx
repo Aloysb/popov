@@ -1,16 +1,11 @@
 import { FormControl, FormLabel, Input } from '@chakra-ui/react';
 
-const AddLeadInput = ({
+const LeadFormInput = ({
   label,
   placeholder,
   value,
   onChange,
-}: {
-  label: string;
-  placeholder: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}): JSX.Element => (
+}: LeadFormInputProps): JSX.Element => (
   <FormControl>
     <FormLabel
       textTransform="uppercase"
@@ -21,13 +16,24 @@ const AddLeadInput = ({
       {label}
     </FormLabel>
     <Input
-      focusBorderColor="orange.700"
       boxShadow="inner"
       value={value}
       onChange={(e) => onChange(e)}
       placeholder={placeholder}
+      _focus={{
+        bg: 'gray.900',
+        boxShadow: 'inner',
+        borderColor: 'orange.700',
+      }}
     />
   </FormControl>
 );
 
-export default AddLeadInput;
+export default LeadFormInput;
+
+type LeadFormInputProps = {
+  label: string;
+  placeholder: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};

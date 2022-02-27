@@ -2,9 +2,10 @@ import { useState } from 'react';
 
 import { Box, Container, Flex } from '@chakra-ui/react';
 
+import AddPage from '../views/Add/AddPage';
+
 import Navbar, { NavigationItems } from './Navbar';
 import SearchPage from './SearchPage';
-import AddLeadPage from './AddLeadPage';
 
 const Router = (): JSX.Element => {
   const DEFAULT_NAVIGATION_ITEM = NavigationItems.ADD;
@@ -17,7 +18,7 @@ const Router = (): JSX.Element => {
       case NavigationItems.LIST:
         return <h1>List</h1>;
       case NavigationItems.ADD:
-        return <AddLeadPage />;
+        return <AddPage />;
       case NavigationItems.MAP:
       default:
         return <h1>Map</h1>;
