@@ -12,37 +12,24 @@ import {
   Stack,
 } from '@chakra-ui/react';
 
-const LeadFormCompanySection = (): JSX.Element => {
-  interface Company {
-    name: string;
-    key: number;
-  }
+import { getAllCompanies } from '../../services/companyService';
+import { Action, ActionType, State } from '../../store/AddLeadStore';
 
-  const [selectedCompany, setSelectedCompany] = useState<null | number>(null);
+const LeadFormCompanySection = ({
+  state,
+  dispatch,
+}: LeadFormCompanySectionProps): JSX.Element => {
+  const { data: companies } = getAllCompanies();
+
+  const selectedCompanyId = state.data.companyId;
+  const selectCompany = (id: string) =>
+    // Select the company or unselect if selected
+    dispatch({
+      type: ActionType.ChangeCompany,
+      payload: selectedCompanyId === id ? '' : id,
+    });
+
   const [search, setSearch] = useState('');
-
-  const companies: Company[] = [
-    {
-      key: 1,
-      name: 'Hello',
-    },
-    {
-      key: 2,
-      name: 'World',
-    },
-    {
-      key: 3,
-      name: 'Surf',
-    },
-    {
-      key: 4,
-      name: 'Pacman',
-    },
-    {
-      key: 5,
-      name: 'Popov',
-    },
-  ];
 
   return (
     <>
@@ -66,31 +53,33 @@ const LeadFormCompanySection = (): JSX.Element => {
           </InputGroup>
         </FormControl>
         <Box h={4} />
-        {companies
-          .filter((company) =>
-            company.name.toLowerCase().includes(search.toLowerCase())
-          )
-          .map((company) => (
-            <Button
-              boxShadow="sm"
-              key={company.key}
-              onClick={() => {
-                setSelectedCompany(company.key);
-              }}
-              variant="outline"
-              _active={{
-                bg: 'orange.600',
-                order: 0,
-              }}
-              order={1}
-              isActive={selectedCompany === company.key}
-              leftIcon={
-                selectedCompany === company.key ? <CheckIcon /> : undefined
-              }
-            >
-              {company.name}
-            </Button>
-          ))}
+        {!!companies &&
+          companies
+            .filter((company) =>
+              company.name.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((company) => (
+              <Button
+                boxShadow="sm"
+                key={company.id}
+                onClick={() => {
+                  selectCompany(company.id.toString());
+                }}
+                variant="outline"
+                _active={{
+                  bg: 'orange.600',
+                }}
+                order={selectedCompanyId === company.id.toString() ? 0 : 1}
+                isActive={selectedCompanyId === company.id.toString()}
+                leftIcon={
+                  selectedCompanyId === company.id.toString() ? (
+                    <CheckIcon />
+                  ) : undefined
+                }
+              >
+                {company.name}
+              </Button>
+            ))}
         <Button
           variant="outline"
           color="whiteAlpha.400"
@@ -106,3 +95,8 @@ const LeadFormCompanySection = (): JSX.Element => {
 };
 
 export default LeadFormCompanySection;
+
+type LeadFormCompanySectionProps = {
+  state: State;
+  dispatch: React.Dispatch<Action>;
+};

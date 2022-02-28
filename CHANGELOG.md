@@ -17,3 +17,4 @@ Initial set up and skeleton of the mobile version.
 - Add search page
 - Add Add a lead page
 - Scaffold the add a lead inputs (DRY)
+- Add Companies service

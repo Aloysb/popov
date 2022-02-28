@@ -6,7 +6,7 @@ const LeadFormSaveButton = ({
   isLoading,
 }: LeadFormSaveButtonProps): JSX.Element => (
   <Center pt="8">
-    <Button size="lg" bg="orange.600" onClick={onClick}>
+    <Button size="lg" bg="orange.600" onClick={() => onClick()}>
       {isLoading ? (
         <Text>Loading</Text>
       ) : (

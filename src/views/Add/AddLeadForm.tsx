@@ -1,12 +1,12 @@
-import { Flex, StatHelpText, useToast } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 import 'axios';
 
 import { useAddLeadStore } from '../../store/AddLeadStore';
 
 import LeadFormCompanySection from './LeadFormCompanySection';
-import LeadFormSaveButton from './LeadFormSaveButton';
 import LeadFormLeadSection from './LeadFormLeadSection';
+import LeadFormSaveButton from './LeadFormSaveButton';
 
 const AddLeadForm = (): JSX.Element => {
   const { state, dispatch, saveNewLead } = useAddLeadStore();
@@ -14,7 +14,7 @@ const AddLeadForm = (): JSX.Element => {
   return (
     <Flex as="form" flexDir="column" h="full">
       <LeadFormLeadSection state={state} dispatch={dispatch} />
-      <LeadFormCompanySection />
+      <LeadFormCompanySection state={state} dispatch={dispatch} />
       <LeadFormSaveButton
         isLoading={state.isLoading}
         onClick={() => {
