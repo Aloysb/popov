@@ -1,6 +1,5 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
-import Navbar, { NavigationItems } from './components/Navbar';
 import Router from './components/Router';
 
 const App = (): JSX.Element => (

@@ -12,17 +12,8 @@ import {
 } from '@chakra-ui/react';
 
 import LeadCard, { Lead } from './LeadCard';
+import FakeLead from '../mocks/FakeLead';
 
-const fakeLead: Lead = {
-  name: 'Raoul',
-  position: 'Chef de chantier',
-  company: {
-    name: 'Charpente',
-    address: {
-      town: 'Bourg en Bresse',
-    },
-  },
-};
 const SearchPage = (): JSX.Element => {
   const [searchValue, setSearchValue] = useState<string>();
   return (
@@ -59,8 +50,8 @@ const SearchPage = (): JSX.Element => {
           {/* {searchValue && ( */}
           <Box flex="1">
             <Stack spacing={4} py={4}>
-              {new Array(8).fill(fakeLead).map((lead) => (
-                <LeadCard lead={fakeLead} />
+              {new Array(8).fill(new FakeLead().get()).map((lead) => (
+                <LeadCard lead={lead} />
               ))}
             </Stack>
           </Box>

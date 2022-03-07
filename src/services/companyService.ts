@@ -3,15 +3,17 @@
 import axios from 'axios';
 import { useQuery, UseQueryResult } from 'react-query';
 
-import { Company } from '../types/general';
+import { TCompany } from '../models/Company';
 import APIEndpoints from '../utils/endpoints';
 import QueryKeys from '../utils/queryKeys';
 
-export function getAllCompanies(): UseQueryResult<Company[], unknown> {
-  return useQuery(QueryKeys.Companies, getAllCompaniesQueryFn);
+export function getAllCompanies(): UseQueryResult<TCompany[], unknown> {
+  return useQuery(QueryKeys.Companies, getAllCompaniesQueryFn, {
+    cacheTime: 0,
+  });
 }
 
-const getAllCompaniesQueryFn = async (): Promise<Company[]> => {
-  const response = await axios.get<Company[]>(APIEndpoints.companies.get);
+const getAllCompaniesQueryFn = async (): Promise<TCompany[]> => {
+  const response = await axios.get<TCompany[]>(APIEndpoints.companies.get);
   return response.data;
 };
